@@ -42,13 +42,12 @@ if sys.argv[-1] == 'tag':
     sys.exit()
 
 readme = open('README.rst').read()
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='django-cookies-samesite',
     version=version,
     description="""Middleware which sets SameSite flag for session and csrf cookies in legacy versions of Django.""",
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     author='Jarek "jotes" Śmiejczak',
     author_email='poke@jotes.work',
     url='https://github.com/jotes/django-cookies-samesite',
@@ -56,12 +55,15 @@ setup(
         'django_cookies_samesite',
     ],
     include_package_data=True,
-    install_requires=[],
+    install_requires=['ua-parser>=0.10.0', 'user-agents==2.1.0'],
     zip_safe=False,
     keywords='django-cookies-samesite',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Framework :: Django :: 1.11',
+        'Framework :: Django :: 2.0',
+        'Framework :: Django :: 2.1',
+        'Framework :: Django :: 2.2',
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'Programming Language :: Python :: 2',
