@@ -1,2 +1,5 @@
 
 # Additional requirements go here
+pyyaml
+ua-parser
+user-agents

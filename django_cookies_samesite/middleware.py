@@ -10,6 +10,7 @@ import warnings
 
 import django
 
+from user_agents import parse
 from distutils.version import LooseVersion
 
 from django.conf import settings
@@ -33,7 +34,11 @@ class CookiesSameSite(MiddlewareMixin):
         # same-site = None introduced for Chrome 80 breaks for Chrome 51-66 
         # Refer (https://www.chromium.org/updates/same-site/incompatible-clients)
         http_user_agent = request.META.get('HTTP_USER_AGENT') or " "
-        if re.search(CHROME_VALIDATE_REGEX, http_user_agent):
+        ua_string = http_user_agent
+	user_agent = parse(ua_string)
+	if user_agent.browser.family == "Safari":
+	    return response
+	if re.search(CHROME_VALIDATE_REGEX, http_user_agent):
             return response
         if LooseVersion(django.__version__) >= LooseVersion('2.1.0'):
             raise DeprecationWarning(
