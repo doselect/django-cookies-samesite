@@ -6,7 +6,6 @@ except ImportError:
 
 import re
 
-import warnings
 
 import django
 
